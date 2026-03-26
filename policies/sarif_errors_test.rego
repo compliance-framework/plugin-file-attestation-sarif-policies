@@ -23,8 +23,9 @@ test_sarif_fail_if_not_a_sarif if {
     "content": "not a sarif",
   }
 
-  violation[v] with input as inp
-  v.remarks == "File isn't a valid SARIF report."
+  violations := violation with input as inp
+  count(violations) == 1
+  violations[{"id": "sarif_report_unparsable", "remarks": "File isn't a valid SARIF report."}]
 }
 
 # test sarif_contains_error fails as invalid SARIF type
@@ -42,8 +43,9 @@ test_sarif_fail_if_json_not_a_sarif if {
     "content": json.marshal(sarif),
   }
 
-  violation[v] with input as inp
-  v.remarks == "File isn't a valid SARIF report."
+  violations := violation with input as inp
+  count(violations) == 1
+  violations[{"id": "sarif_report_invalid", "remarks": "File isn't a valid SARIF report."}]
 }
 
 # test sarif_contains_error fails as invalid SARIF type
@@ -139,8 +141,9 @@ test_violation_when_error_and_file_exists if {
     "content": json.marshal(sarif),
   }
 
-  violation[v] with input as inp
-  v.remarks == "SARIF report contains at least one error result"
+  violations := violation with input as inp
+  count(violations) == 1
+  violations[{"id": "sarif_error_result_present", "remarks": "SARIF report contains at least one error result"}]
 }
 
 # test no violation when SARIF has no error
@@ -163,4 +166,10 @@ test_no_violation_when_no_error if {
   
   violations := [v | violation[v] with input as inp]
   count(violations) == 0
+}
+
+test_risk_template_maps_error_result_violation_id if {
+  templates := risk_templates
+  count(templates) == 1
+  templates[_].violation_ids[_] == "sarif_error_result_present"
 }
