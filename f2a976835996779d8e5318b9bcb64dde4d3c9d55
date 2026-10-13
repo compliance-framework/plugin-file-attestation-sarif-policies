@@ -1,2 +1,5 @@
 lisa-design:
 - Spec revised mid-run: Regal warnings are fixed when mechanical and behaviour-preserving, tests may be rewritten equivalently. Test-file warnings are now fixed (supersedes the earlier "test-file warnings left" note). The three sarif_is_invalid prefer-some-in warnings stay: bare parsed.runs[i] / results[j] reject false-valued entries, so a plain some..in rewrite changes violations for runs: [false] / results: [false].
+
+lisa-selfreview:
+pass 2 (strict), verdict approve: no new findings. Pass-1 dismissed items unchanged (pre-existing, go to the PR body). Test ASTs identical to main modulo renames (before the test Regal commit); whole-package eval identical on 256 inputs after it; rewritten tests fail under mutation.
