@@ -5,3 +5,12 @@ lisa-design:
 - Regal warnings fixed only where the rewrite is equivalent for all inputs (messy-rule reorder; some..in in sarif_contains_error, where run.results truthiness is still checked). The sarif_is_invalid some..in warnings are left: parsed.runs[i] / results[j] as bare expressions reject false-valued entries, which a plain some..in would not, so a rewrite could change violations for inputs like runs: [false].
 - Test-file Regal warnings (use-in-operator, equals-over-count, pointless-reassignment, prefer-some-in) are left so existing test bodies stay unchanged per the spec.
 - Equivalence verified: title, description, risk_templates, has_tracked_file and violation identical between base and new on 256 inputs (test inputs plus edge cases).
+
+lisa-selfreview:
+pass 1 (strict), verdict request_changes:
+- [must-fix REGO-META-001 b04fe0fff00a] policies/sarif_errors.rego: no METADATA block (pre-existing).
+- [must-fix REGO-RISK-002 a8bd6e70b9f8] sarif_report_unparsable / sarif_report_invalid have no risk template (pre-existing).
+- [must-fix REGO-NEG-001 64b920a6ba16] unparsable violation fires when input.content is absent or JSON false (pre-existing).
+- [should-fix REGO-README-001 d4984a44bd89] README does not list the policy (pre-existing).
+- [nit X:maintainability/makefile-checks-drift-from-ci 2e4203488a83] make validate lacks --strict, no fmt/regal targets (pre-existing).
+- [nit CORE-STYLE-001 ba7fc15bb8b5] comments on the two sarif_is_invalid tests (lines 37-48) say sarif_contains_error.
