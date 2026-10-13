@@ -1,0 +1,3 @@
+lisa-addressed:
+pass 1: [nit CORE-STYLE-001 ba7fc15bb8b5] reworded the comments above the two sarif_is_invalid tests; bodies unchanged.
+pass 1 dismissed (pre-existing, fixing would change policy output or is out of scope; go to PR "Open questions"/follow-ups): REGO-META-001, REGO-RISK-002, REGO-NEG-001, REGO-README-001, makefile-checks-drift-from-ci.
