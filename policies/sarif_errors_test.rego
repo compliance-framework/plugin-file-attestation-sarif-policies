@@ -103,12 +103,12 @@ test_no_violation_when_no_error if {
 		"content": json.marshal(sarif),
 	}
 
-	violations := [v | violation[v] with input as inp]
-	count(violations) == 0
+	violations := [v | some v, _ in violation with input as inp]
+	violations == []
 }
 
 test_risk_template_maps_error_result_violation_id if {
-	templates := risk_templates
-	count(templates) == 1
-	templates[_].violation_ids[_] == "sarif_error_result_present"
+	count(risk_templates) == 1
+	some template in risk_templates
+	"sarif_error_result_present" in template.violation_ids
 }
