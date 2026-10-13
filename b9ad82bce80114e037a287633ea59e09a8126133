@@ -1,0 +1,3 @@
+lisa-selfreview:
+Pass 1 (final): approve, no findings. Diff matches plugin-file-attestation-policies#4 (approved reference) byte-for-byte for every workflow and release-please-config.json; only the manifest seed (0.2.0) and the deleted build-and-upload.yml are repo-specific. actionlint v1.7.12 clean; OPA 1.14.1 check/test (11/11)/build ok; old and new opa build commands give identical bundles (sha256 8584c73b...).
+Note (out of scope, unchanged behaviour): the bundle includes policies/sarif_errors_test.rego, as before.
