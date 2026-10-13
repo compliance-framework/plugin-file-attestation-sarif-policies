@@ -1,0 +1,7 @@
+lisa-design:
+- ci.yml is a verbatim copy of mock-plugin-policies-1 ci.yml (workflows v1.5.1 pin); policies live in policies/, the ci-policies default, so no directory input.
+- No repo Regal config: CI uses the shared base config (warnings non-blocking). Only Regal errors and fmt were mandatory.
+- Duplicate test names were renamed rather than merged/deleted: OPA 1.14.1 already runs each body as a separate test (#01/#02), all passing, so renames keep every assertion and change nothing at runtime.
+- Regal warnings fixed only where the rewrite is equivalent for all inputs (messy-rule reorder; some..in in sarif_contains_error, where run.results truthiness is still checked). The sarif_is_invalid some..in warnings are left: parsed.runs[i] / results[j] as bare expressions reject false-valued entries, which a plain some..in would not, so a rewrite could change violations for inputs like runs: [false].
+- Test-file Regal warnings (use-in-operator, equals-over-count, pointless-reassignment, prefer-some-in) are left so existing test bodies stay unchanged per the spec.
+- Equivalence verified: title, description, risk_templates, has_tracked_file and violation identical between base and new on 256 inputs (test inputs plus edge cases).
