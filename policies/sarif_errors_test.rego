@@ -34,13 +34,13 @@ test_sarif_fail_if_json_not_a_sarif if {
 	violations[{"id": "sarif_report_invalid", "remarks": "File isn't a valid SARIF report."}]
 }
 
-# test sarif_contains_error fails as invalid SARIF type
+# test sarif_is_invalid when a run has no results field
 test_sarif_fail_if_json_not_a_sarif_results_missing if {
 	sarif := {"runs": [{"foo": "bar"}]}
 	sarif_is_invalid(sarif)
 }
 
-# test sarif_contains_error fails as invalid SARIF type
+# test sarif_is_invalid when a result has no level
 test_sarif_is_invalid_if_result_has_no_level if {
 	sarif := {"runs": [{"results": [{"foo": "bar"}]}]}
 	sarif_is_invalid(sarif)
